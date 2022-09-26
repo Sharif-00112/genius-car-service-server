@@ -35,8 +35,10 @@ async function run() {
 
       // console.log('Got New Service', newService);
       console.log('Added New Service', result);
+
       res.json(result);
-    });
+
+    })
    
 
   } finally {

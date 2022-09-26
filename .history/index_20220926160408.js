@@ -14,7 +14,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-// CRUD Operation
+// Check Connection
 async function run() {
   try {
     const database = client.db("carServiceDB");
@@ -30,13 +30,7 @@ async function run() {
         "time": 2,
         "img": "https://i.ibb.co/44FQRHQ/img-1.jpg"
       }
-
-      const result = await servicesCollection.insertOne(service);
-
-      // console.log('Got New Service', newService);
-      console.log('Added New Service', result);
-      res.json(result);
-    });
+    })
    
 
   } finally {
