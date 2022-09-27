@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
-// var ObjectId = require('mongodb').ObjectID;
 require('dotenv').config();
 const port = process.env.PORT || 3001;
 
@@ -58,15 +57,13 @@ async function run() {
       res.json(service);
     })
 
-    //DELETE API (needs to debug)
+    //DELETE API
     app.delete('/services/:id', async(req, res) =>{
-      const id = (req.params.id);
-      const ID = id.trim();
-      console.log('getting specific delete service', id , typeof(id))
-      console.log('getting specific delete service', ID , typeof(ID))
-      // const query = { _id: ObjectId(id) };
-      // const result = await servicesCollection.deleteOne(query);
-      // res.json(result);
+      const id = req.params.id;
+      console.log('getting specific delete service', id)
+      const query = { _id: ObjectId(id) };
+      const result = await servicesCollection.deleteOne(query);
+      res.json(result);
     })
 
   } finally {

@@ -58,7 +58,7 @@ async function run() {
       res.json(service);
     })
 
-    //DELETE API (needs to debug)
+    //DELETE API
     app.delete('/services/:id', async(req, res) =>{
       const id = (req.params.id);
       const ID = id.trim();

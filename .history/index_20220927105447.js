@@ -1,12 +1,9 @@
 const express = require('express');
-const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
-// var ObjectId = require('mongodb').ObjectID;
-require('dotenv').config();
-const port = process.env.PORT || 3001;
-
 const app = express();
+const port = 3001;
+
+const cors = require('cors');
 
 //middlewares
 app.use(cors());
@@ -15,9 +12,14 @@ app.use(express.json());
 //user: prodManagement1
 //pass: jJg4x3Ns8wCk6HCN
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+
+require('dotenv').config();
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.aruppvu.mongodb.net/?retryWrites=true&w=majority`;
 // console.log(uri);
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 // CRUD Operation
@@ -58,15 +60,13 @@ async function run() {
       res.json(service);
     })
 
-    //DELETE API (needs to debug)
+    //DELETE API
     app.delete('/services/:id', async(req, res) =>{
-      const id = (req.params.id);
-      const ID = id.trim();
-      console.log('getting specific delete service', id , typeof(id))
-      console.log('getting specific delete service', ID , typeof(ID))
-      // const query = { _id: ObjectId(id) };
-      // const result = await servicesCollection.deleteOne(query);
-      // res.json(result);
+      const id = req.params.id;
+      console.log('getting specific delete service', id)
+      const query = { _id: ObjectId(id) };
+      const result = await servicesCollection.deleteOne(query);
+      res.json(result);
     })
 
   } finally {

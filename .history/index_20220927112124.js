@@ -58,15 +58,14 @@ async function run() {
       res.json(service);
     })
 
-    //DELETE API (needs to debug)
+    //DELETE API
     app.delete('/services/:id', async(req, res) =>{
       const id = (req.params.id);
       const ID = id.trim();
-      console.log('getting specific delete service', id , typeof(id))
-      console.log('getting specific delete service', ID , typeof(ID))
-      // const query = { _id: ObjectId(id) };
-      // const result = await servicesCollection.deleteOne(query);
-      // res.json(result);
+      console.log('getting specific delete service', id)
+      const query = { _id: ObjectId(ID) };
+      const result = await servicesCollection.deleteOne(query);
+      res.json(result);
     })
 
   } finally {
